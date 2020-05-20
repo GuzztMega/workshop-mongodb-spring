@@ -2,6 +2,7 @@ package com.guzzmega.workshopmongodb.config;
 
 import com.guzzmega.workshopmongodb.domain.Post;
 import com.guzzmega.workshopmongodb.domain.User;
+import com.guzzmega.workshopmongodb.dto.AuthorDTO;
 import com.guzzmega.workshopmongodb.repositories.PostRepository;
 import com.guzzmega.workshopmongodb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,11 @@ public class Instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Gray", "alex@yahoo.com");
         User bob = new User( null, "Bob White", "bob@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Lets ride!!!", "Heading to the beach...", mary);
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Moooorning!", "What a beautiful day", mary);
-
         userRepository.saveAll(Arrays.asList(mary, alex, bob));
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Lets ride!!!", "Heading to the beach...", new AuthorDTO(mary));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Moooorning!", "What a beautiful day", new AuthorDTO(mary));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }
